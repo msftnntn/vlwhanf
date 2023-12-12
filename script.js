@@ -1,19 +1,43 @@
-function setup() {
-    createCanvas(windowWidth, windowHeight, SVG);
-}
+let circles = [];
 
-function keyPressed(event){ // 엔터키로 저장하는 법
-    console.log(event.key);
-    if( event.key === "Enter") {
-        save("제목","svg")
-    }
+function setup() {
+  createCanvas(600, 600);
+  noStroke();
 }
 
 function draw() {
-  
-    background(250);
+  background(255);
+
+  if (frameCount % 10 === 0) {
+    let gray = floor(random(256)); // 회색조
+    let newCircle = {
+      x: width / 2,
+      y: height / 2,
+      maxSize: 300,
+      radius: 300,
+      color: color(gray, gray, gray) 
+    };
+    circles.push(newCircle);
+  }
+
+  for (let i = circles.length - 1; i >= 0; i--) {
+    let circle = circles[i];
+    updateCircle(circle);
+    displayCircle(circle);
+
     
-    fill(5,68,0);
-    noStroke();
-    ellipse(225,680,240,160); // 진한 잎
+    if (circle.radius <= 0) {
+      circles.splice(i, 1);
+    }
+  }
+}
+
+function updateCircle(circle) {
+  // 원 크기 줄임
+  circle.radius -= 1;
+}
+
+function displayCircle(circle) {
+  fill(circle.color);
+  ellipse(circle.x, circle.y, circle.radius * 2, circle.radius * 2);
 }
