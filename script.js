@@ -8,24 +8,25 @@ function setup() {
 function draw() {
   background(255);
 
+  // 새로운 원
   if (frameCount % 10 === 0) {
-    let gray = floor(random(256)); // 회색조
+    let grayValue = floor(random(256)); // 회색조
     let newCircle = {
       x: width / 2,
       y: height / 2,
       maxSize: 300,
       radius: 300,
-      color: color(gray, gray, gray) 
+      color: color(grayValue, grayValue, grayValue) 
     };
     circles.push(newCircle);
   }
 
+  //  원 업데이트 그리기
   for (let i = circles.length - 1; i >= 0; i--) {
     let circle = circles[i];
     updateCircle(circle);
     displayCircle(circle);
 
-    
     if (circle.radius <= 0) {
       circles.splice(i, 1);
     }
@@ -33,7 +34,7 @@ function draw() {
 }
 
 function updateCircle(circle) {
-  // 원 크기 줄임
+  // 원 크기를 줄임
   circle.radius -= 1;
 }
 
