@@ -1,7 +1,7 @@
 let circles = [];
 
 function setup() {
-  createCanvas(screenWidth, screenHeight);
+  createCanvas(600, 600);
   noStroke();
 }
 
